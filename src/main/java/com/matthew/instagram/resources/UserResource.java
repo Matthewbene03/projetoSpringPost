@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.matthew.instagram.entities.Post;
 import com.matthew.instagram.entities.User;
 import com.matthew.instagram.services.UserService;
 
@@ -34,6 +35,12 @@ public class UserResource {
 	public ResponseEntity<User> findById(@PathVariable Integer id) {
 		User user = userService.findById(id);
 		return ResponseEntity.ok().body(user);
+	}
+	
+	@GetMapping(value = "/{id}/posts")
+	public ResponseEntity<List<Post>> findPostsUser(@PathVariable Integer id) {
+		User user = userService.findById(id);
+		return ResponseEntity.ok().body(user.getListPost());
 	}
 	
 	@PostMapping
